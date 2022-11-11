@@ -20,9 +20,14 @@ async function run() {
     try {
       await client.connect();
       const videosCollection = client.db("allvideos").collection("videos");
+      const tagsCollection = client.db("allvideos").collection("tags");
       app.get("/videos", async (req, res) => {
         const videos = await videosCollection.find().toArray();
         res.send(videos);
+      });
+      app.get("/tags", async (req, res) => {
+        const tags = await tagsCollection.find().toArray();
+        res.send(tags);
       });
     } finally {
     }
